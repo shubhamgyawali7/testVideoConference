@@ -42,5 +42,5 @@ export default function Video() {
     );
   }
 
-  return <VideoModel/>;
+  return <VideoModel />;
 }

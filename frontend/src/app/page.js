@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import JoinRoomModal from '../components/JoinRoomModal';
+import JoinRoomModal from '@/components/JoinRoomModal';
 
 export default function Home() {
   const [showJoinModal, setShowJoinModal] = useState(true);

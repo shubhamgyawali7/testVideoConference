@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import socket from "@/lib/socket.js";
 import ChatSidebar from "./ChatSidebar";
-import { addChatMessage, addPeer } from "@/store/conferenceSlice";
+import { addChatMessage, addPeer } from "@/store/conferenceSlice.js";
 import VideoGrid from "./VideoGrid";
 import ControlPanel from "./ControlPanel";
 

@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import socket from "@/lib/socket.js";
 import ChatSidebar from "./ChatSidebar";
-import { addChatMessage } from "@/store/conferenceSlice";
+import { addChatMessage } from "@/store/conferenceSlice.js";
 
 const ChatModel = () => {
   const dispatch = useDispatch();

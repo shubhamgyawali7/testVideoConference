@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import { setUser, setRoom } from "@/store/conferenceSlice.js";
 import VideoModel from "@/components/VideoModel";
 
-
 export default function Room() {
   const params = useParams(); // dynamic route parameters ([id])
   const searchParams = useSearchParams(); // query parameters (username)
@@ -44,5 +43,5 @@ export default function Room() {
     );
   }
 
-  return <VideoModel/>;
+  return <VideoModel />;
 }
