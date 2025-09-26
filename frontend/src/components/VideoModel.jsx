@@ -14,8 +14,7 @@ const VideoModel = () => {
   const [isVideoOn, setIsVideoOn] = useState(true);
   const [isScreenSharing, setIsScreenSharing] = useState(false);
 
-const socketRef = useRef(socket);
-
+  const socketRef = useRef(socket);
 
   const [peers, setPeers] = useState(new Map());
   const peersRef = useRef(new Map());
@@ -280,9 +279,28 @@ const socketRef = useRef(socket);
   };
 
   const leaveRoom = () => {
-    cleanup();
+    cleanData();
     router.push("/");
   };
+
+  // -------------------
+  // Cleanup
+  // -------------------
+  const cleanData = () => {
+    socketRef.current?.emit("leave-room");
+    socketRef.current?.disconnect();
+    socketRef.current = null;
+
+    localStream?.getTracks().forEach((track) => track.stop());
+    screenStreamRef.current?.getTracks().forEach((track) => track.stop());
+
+    peersRef.current.forEach((peer) => peer.connection.close());
+    peersRef.current.clear();
+    setPeers(new Map());
+
+    window.localStream = null;
+  };
+
   return (
     <div className="h-screen bg-gray-100 flex flex-col">
       {/* Header */}

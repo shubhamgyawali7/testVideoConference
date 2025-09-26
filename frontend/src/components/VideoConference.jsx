@@ -31,7 +31,7 @@ const VideoConference = () => {
       connectSocket();
     }
 
-    return () => cleanup();
+    return () => cleanData();
   }, [user, room]);
 
   // -------------------
@@ -219,14 +219,14 @@ const VideoConference = () => {
   };
 
   const leaveRoom = () => {
-    cleanup();
+    cleanData();
     router.push('/');
   };
 
   // -------------------
   // Cleanup
   // -------------------
-  const cleanup = () => {
+  const cleanData = () => {
     socketRef.current?.emit('leave-room');
     socketRef.current?.disconnect();
     socketRef.current = null;
