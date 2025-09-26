@@ -321,7 +321,7 @@ const VideoModel = () => {
 
       {/* Video Content */}
       <div className="flex flex-1 overflow-hidden">
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col border-blue-800">
           {/* Local and Remote Videos */}
           <VideoGrid localStream={localStream} user={user} />
 

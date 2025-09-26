@@ -38,8 +38,10 @@ const VideoElement = ({ stream, username, isLocal, userId }) => {
 
 const VideoGrid = ({ localStream, user }) => {
   const { peers } = useSelector(state => state.conference);
+console.log(peers);
 
   const allPeers = Object.entries(peers);
+  
   const totalParticipants = allPeers.length + 1; // +1 for local user
 
   const getGridClass = () => {
