@@ -25,6 +25,10 @@ app.get("/", (req, res) => {
   res.send("Hello from Vercel!");
 });
 
+app.get("/admin", (req, res) => {
+  res.send("Hello from Admin!");
+});
+
 // Socket.IO setup
 const io = new SocketIo(server, {
   cors: {
