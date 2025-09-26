@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   user: null,
   room: null,
-  peers: [],
+  peers: {}, // changed from array to object
   chatMessages: {},
 };
 
@@ -19,44 +19,28 @@ const conferenceSlice = createSlice({
     },
     addChatMessage: (state, action) => {
       const { roomId, ...msg } = action.payload;
-
-      state.chatMessages = {
-        ...state.chatMessages,
-        [roomId]: [...(state.chatMessages[roomId] || []), msg],
-      };
+      state.chatMessages[roomId] = [...(state.chatMessages[roomId] || []), msg];
     },
     addPeer: (state, action) => {
       const { socketId, userId, username, stream } = action.payload;
 
-      // Check if peer already exists
-      const existingIndex = state.peers.findIndex(
-        (p) => p.socketId === socketId
-      );
-
-      if (existingIndex !== -1) {
-        // Update existing peer (e.g., add stream)
-        state.peers[existingIndex] = {
-          ...state.peers[existingIndex],
-          userId,
-          username,
-          stream: stream || state.peers[existingIndex].stream,
-        };
-      } else {
-        // Add new peer
-        state.peers.push({
-          socketId,
-          userId,
-          username,
-          stream: stream || null,
-        });
-      }
+      state.peers[socketId] = {
+        ...(state.peers[socketId] || {}),
+        userId,
+        username,
+        stream:
+          stream ||
+          (state.peers[socketId] && state.peers[socketId].stream) ||
+          null,
+      };
     },
     removePeer: (state, action) => {
       const socketId = action.payload;
-      state.peers = state.peers.filter((p) => p.socketId !== socketId);
+      delete state.peers[socketId];
     },
   },
 });
 
-export const { setUser, setRoom, addChatMessage,addPeer,removePeer } = conferenceSlice.actions;
+export const { setUser, setRoom, addChatMessage, addPeer, removePeer } =
+  conferenceSlice.actions;
 export default conferenceSlice.reducer;
